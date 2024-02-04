@@ -1,0 +1,161 @@
+@use "../mixin" as mxn;
+
+$primaryColor: #00c2ff;
+$secondaryColor: #0066ff;
+
+@mixin signUpButtonStyle {
+  border: none;
+  background-color: $secondaryColor;
+  color: white;
+}
+
+@mixin loginButtonStyle {
+  border: 2px solid $secondaryColor;
+  color: $secondaryColor;
+  background-color: white;
+}
+
+.container-navbar {
+  background-color: $primaryColor;
+  display: flex;
+  height: 60px;
+
+  section:first-child {
+    @include mxn.center();
+    width: 110px;
+
+    button {
+      display: flex;
+      flex-direction: column;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      span {
+        @include mxn.widhei(40px, 3px);
+        background-color: white;
+        margin-bottom: 3px;
+        transition: 0.1s linear;
+      }
+
+      span:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  header {
+    @include mxn.center();
+
+    h1 {
+      color: white;
+      font-size: 32px;
+      text-shadow: -2px 2px 0 rgba($color: black, $alpha: 25%);
+    }
+  }
+
+  section:nth-child(3) {
+    @include mxn.center();
+    flex: 1;
+
+    ul {
+      list-style: none;
+      display: flex;
+      height: 100%;
+
+      li {
+        @include mxn.widhei(100px);
+
+        button {
+          @include mxn.widhei();
+          background-color: transparent;
+          border: none;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background-color: white;
+        }
+
+        .active-page:hover {
+          color: black;
+        }
+
+        button:active,
+        .active-page,
+        .active-page:active {
+          color: white;
+          background-color: $secondaryColor;
+        }
+      }
+    }
+  }
+
+  section:last-child {
+    @include mxn.center(flex-start);
+    width: 300px;
+
+    button {
+      @include mxn.widhei(100px, 40px);
+      margin: 0 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:first-child {
+      @include signUpButtonStyle();
+    }
+
+    button:last-child {
+      @include loginButtonStyle();
+    }
+
+    button:hover {
+      border: 2px solid white;
+    }
+
+    button:first-child:active {
+      @include loginButtonStyle();
+    }
+
+    button:last-child:active {
+      @include signUpButtonStyle();
+    }
+  }
+}
+
+@media screen and (max-width: 975px) {
+  .container-navbar {
+    height: 50px;
+
+    section:first-child {
+      width: 70px;
+
+      button span {
+        width: 30px;
+      }
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    ul li {
+      display: none;
+    }
+
+    section:last-child {
+      width: 150px;
+
+      button {
+        @include mxn.widhei(60px, 25px);
+        border-radius: 5px;
+        font-size: 12px;
+        margin: 0 8px;
+      }
+    }
+  }
+}
