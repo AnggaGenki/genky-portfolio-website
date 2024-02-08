@@ -1,24 +1,65 @@
 @use "../mixin" as mxn;
 
-$primaryColor: #00c2ff;
-$secondaryColor: #0066ff;
+$primary-color: #00c2ff;
+$secondary-color: #0066ff;
 
-@mixin signUpButtonStyle {
+@mixin sign-up-button {
   border: none;
-  background-color: $secondaryColor;
+  background-color: $secondary-color;
   color: white;
 }
 
-@mixin loginButtonStyle {
-  border: 2px solid $secondaryColor;
-  color: $secondaryColor;
+@mixin login-button {
+  border: 2px solid $secondary-color;
+  color: $secondary-color;
   background-color: white;
 }
 
+@mixin button-burger-menu {
+  button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+  }
+
+  button:hover {
+    text-shadow: 0 1px 0 black;
+    color: white;
+  }
+
+  button:active {
+    text-shadow: none;
+  }
+}
+
+@mixin burger-menu {
+  @include mxn.center();
+  background-color: $primary-color;
+  position: fixed;
+
+  ul {
+    list-style: none;
+
+    li {
+      @include button-burger-menu();
+      border-bottom: 1px solid white;
+      margin-top: 30px;
+
+      button {
+        font-size: 16px;
+        margin-left: 10px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
 .container-navbar {
-  background-color: $primaryColor;
+  @include mxn.widhei(100%, 60px);
+  background-color: $primary-color;
   display: flex;
-  height: 60px;
+  position: fixed;
 
   section:first-child {
     @include mxn.center();
@@ -86,7 +127,7 @@ $secondaryColor: #0066ff;
         .active-page,
         .active-page:active {
           color: white;
-          background-color: $secondaryColor;
+          background-color: $secondary-color;
         }
       }
     }
@@ -106,11 +147,11 @@ $secondaryColor: #0066ff;
     }
 
     button:first-child {
-      @include signUpButtonStyle();
+      @include sign-up-button();
     }
 
     button:last-child {
-      @include loginButtonStyle();
+      @include login-button();
     }
 
     button:hover {
@@ -118,13 +159,61 @@ $secondaryColor: #0066ff;
     }
 
     button:first-child:active {
-      @include loginButtonStyle();
+      @include login-button();
     }
 
     button:last-child:active {
-      @include signUpButtonStyle();
+      @include sign-up-button();
     }
   }
+}
+
+.container-navbar-burger-menu {
+  @include mxn.widhei(200px, 250px);
+  @include burger-menu();
+  top: 60px;
+
+  ul {
+    @include mxn.widhei(180px, 230px);
+
+    li:first-child {
+      display: none;
+    }
+  }
+}
+
+.container-navbar-sub-burger-menu {
+  @include mxn.widhei(150px, 300px);
+  @include burger-menu();
+  top: 50px;
+  display: none;
+  flex-direction: column;
+
+  div {
+    @include button-burger-menu();
+    width: 100%;
+
+    button {
+      margin-left: 15px;
+      transform: scale(2.3);
+    }
+  }
+
+  ul {
+    @include mxn.widhei(130px, 280px);
+
+    li:first-child {
+      margin-top: 25px;
+    }
+  }
+}
+
+.show-burger-menu {
+  animation: show-burger-menu 0.3s forwards;
+}
+
+.hide-burger-menu {
+  animation: hide-burger-menu 0.3s forwards;
 }
 
 @media screen and (max-width: 975px) {
@@ -157,5 +246,46 @@ $secondaryColor: #0066ff;
         margin: 0 8px;
       }
     }
+  }
+
+  .container-navbar-burger-menu {
+    @include mxn.widhei(150px, 300px);
+    top: 50px;
+
+    ul {
+      @include mxn.widhei(130px, 280px);
+
+      li:first-child {
+        display: flex;
+      }
+    }
+  }
+
+  .container-navbar-sub-burger-menu {
+    display: flex;
+  }
+}
+
+@keyframes show-burger-menu {
+  from {
+    margin-left: -200px;
+    opacity: 0;
+  }
+
+  to {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes hide-burger-menu {
+  from {
+    margin-left: 0;
+    opacity: 1;
+  }
+
+  to {
+    margin-left: -200px;
+    opacity: 0;
   }
 }
