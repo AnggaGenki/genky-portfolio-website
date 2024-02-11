@@ -1,7 +1,15 @@
 import { Fragment, useState } from "react";
 import "./index.scss";
+import ScorePageComponent from "./page_components/score";
+import ThemePageComponent from "./page_components/theme";
+import WallpaperPageComponent from "./page_components/wallpaper";
 
 export default function App() {
+  const [sShowScorePageComponent, setShowScorePageComponent] = useState(false);
+  const [sShowThemePageComponent, setShowThemePageComponent] = useState(false);
+  const [sShowWallpaperPageComponent, setShowWallpaperPageComponent] =
+    useState(false);
+
   const [soShowBurgerMenu, setoShowBurgerMenu] = useState({
     status: false,
     rotate: 0,
@@ -146,13 +154,19 @@ export default function App() {
               <button onClick={fHandleSubBurgerMenu}>Menu</button>
             </li>
             <li>
-              <button>Score</button>
+              <button onClick={() => setShowScorePageComponent(true)}>
+                Score
+              </button>
             </li>
             <li>
-              <button>Theme</button>
+              <button onClick={() => setShowThemePageComponent(true)}>
+                Theme
+              </button>
             </li>
             <li>
-              <button>Wallpaper</button>
+              <button onClick={() => setShowWallpaperPageComponent(true)}>
+                Wallpaper
+              </button>
             </li>
           </ul>
         </div>
@@ -177,6 +191,20 @@ export default function App() {
             </li>
           </ul>
         </div>
+      ) : null}
+
+      {sShowScorePageComponent ? (
+        <ScorePageComponent _Close={() => setShowScorePageComponent(false)} />
+      ) : null}
+
+      {sShowThemePageComponent ? (
+        <ThemePageComponent _Close={() => setShowThemePageComponent(false)} />
+      ) : null}
+
+      {sShowWallpaperPageComponent ? (
+        <WallpaperPageComponent
+          _Close={() => setShowWallpaperPageComponent(false)}
+        />
       ) : null}
     </Fragment>
   );

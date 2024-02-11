@@ -1,0 +1,9 @@
+@use "../../../mixin" as mxn;
+
+.container-theme-page-component {
+  .pop-up-page {
+    section {
+      @include mxn.center();
+    }
+  }
+}

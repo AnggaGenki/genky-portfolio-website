@@ -1,7 +1,64 @@
 @use "./mixin" as mxn;
 
+$primary-color: #00c2ff;
+
 * {
   @include mxn.marpad();
   font-family: sans-serif;
   box-sizing: border-box;
+}
+
+.page-component {
+  @include mxn.widhei();
+  @include mxn.center();
+  position: fixed;
+  background-color: rgba($color: #000000, $alpha: 30%);
+
+  .pop-up-page {
+    @include mxn.widhei(90%, 90%);
+    @include mxn.center(none);
+    flex-direction: column;
+    background-color: white;
+    border: 5px solid $primary-color;
+    border-radius: 10px;
+
+    header {
+      @include mxn.center();
+      width: 90%;
+      padding: 20px 0;
+      border-bottom: 3px solid black;
+
+      h1 {
+        color: $primary-color;
+        text-shadow: -2px 2px 0 rgba($color: #000000, $alpha: 25%);
+      }
+    }
+
+    section {
+      @include mxn.widhei(90%);
+      margin: 20px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 975px) {
+  .page-component {
+    .pop-up-page {
+      @include mxn.widhei();
+      border: none;
+      border-radius: 0;
+
+      header {
+        @include mxn.marpad(20px 0 0, 15px 0);
+
+        h1 {
+          font-size: 30px;
+        }
+      }
+
+      section {
+        margin: 15px 0;
+      }
+    }
+  }
 }
